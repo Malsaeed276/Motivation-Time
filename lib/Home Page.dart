@@ -30,20 +30,24 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
   @override
   bool get wantKeepAlive => true;
 
+  //
   Color favorite = Colors.grey;
   Future<Quote> quote;
   Future<List<Quote>> wholeQuotes;
   String qText;
   String qAuthor;
   
-  
+
+  //get the quote
   @override
   void initState() {
     super.initState();
     quote = fetchQuote();
   }
   
-  
+
+  //Liked function
+  //Todo add the liked quote into the firebase
   void _liked() {
 
     setState(() {
@@ -65,10 +69,13 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
+
+              //Todo Setting page (just set the time that we will send the notification to user, sign out)
               print("Icon setting is pressed");
             },
           ),
         ],
+
         title: Text("Motivation time"),
       ),
 
@@ -90,12 +97,7 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
                     );
                   }),
               Spacer(flex: 2,),
-              IconButton(
-                  icon: Icon(Icons.home),
-                  color: Colors.black,
-                  onPressed: () {
-
-                  }),
+              Icon(Icons.home),
               Spacer(flex: 4,),
               IconButton(icon: Icon(Icons.share),
                   color: Colors.grey,
@@ -113,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
         padding: const EdgeInsets.all(10.0),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(
                 flex: 4,
@@ -122,30 +123,7 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
               Spacer(
                 flex: 2,
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'If you want really to change this world you have to talk an action',
-                      ),
-                      Text(
-                        'Action Example',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .headline4,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              actionCard(context),
               Spacer(
                 flex: 4,
               ),
@@ -165,6 +143,33 @@ class _MyHomePageState extends State<MyHomePage>  with AutomaticKeepAliveClientM
         elevation: 4,
       ),
     );
+  }
+
+  Card actionCard(BuildContext context) {
+    return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'If you want really to change this world you have to talk an action',
+                    ),
+                    Text(
+                      'Action Example',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline4,
+                    ),
+                  ],
+                ),
+              ),
+            );
   }
 
   Card quoteCard() {
