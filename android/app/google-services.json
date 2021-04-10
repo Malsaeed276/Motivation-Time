@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "925920604857",
+    "project_id": "motivation-53cba",
+    "storage_bucket": "motivation-53cba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925920604857:android:28dbf2a8bdac2df6c46168",
+        "android_client_info": {
+          "package_name": "dsc.motivatin.motivstion_sc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925920604857-fusrjm8ea81cqcfd2pgc4d2012d3jf4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-luMmcB5QuSWOyf3Vr5JpkBDBYNZdJwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925920604857-fusrjm8ea81cqcfd2pgc4d2012d3jf4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Home Page.dart';
 
 void main() {
   HttpOverrides.global = new MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -17,7 +20,10 @@ class MyHttpOverrides extends HttpOverrides{
   }
 }
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  static CollectionReference liked = FirebaseFirestore.instance.collection('liked');
+  static CollectionReference actionList =
+  FirebaseFirestore.instance.collection('actionList');
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,9 +35,29 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.white,
         primarySwatch: Colors.blue,
         cardColor: Colors.grey,
+        textTheme: TextTheme(
+          bodyText2: TextStyle(fontSize: 18,fontWeight: FontWeight.w300,color: Colors.white,)
+        )
 
       ),
-      home: MyHomePage(),
+      home: FutureBuilder(
+        // Initialize FlutterFire:
+        future: _initialization,
+        builder: (context, snapshot) {
+          // Check for errors
+          if (snapshot.hasError) {
+            return Center(child: Text("there is an Erorr ${snapshot.error.toString()}"),);
+          }
+
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MyHomePage();
+          }
+
+          // Otherwise, show something whilst waiting for initialization to complete
+          return Center(child: CircularProgressIndicator(),);
+        },
+      ),
     );
   }
 }
